@@ -1,0 +1,98 @@
+body{
+    background-image: url('stripes-light.png'); /* Background pattern from Toptal Subtle Patterns */
+    background-attachment: fixed;
+    word-break: break-all;
+}
+
+
+h4{
+    margin: 0 !important;
+    padding-bottom: 30px;
+}
+
+#title{
+    margin-bottom: 30px;
+}
+
+#defaultColorsButton{
+    margin-right: 15px;
+}
+
+#text{
+    margin-bottom: 30px;
+}
+
+.colorButtons{
+    margin: 15px;
+}
+
+
+.noteDiv{
+    height: 800px;
+    background-color: rgb(235, 235, 235);
+    margin-bottom: 100px !important;
+}
+
+.pinnedNoteDivTitle{
+    border: 2px solid;
+    border-color: rgba(218, 132, 132, 0.849);
+    border-bottom: none;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(218, 132, 132, 0.849);
+    font-size: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+}
+
+.pinnedNoteDivText{
+    border: 2px solid;
+    border-color: rgba(218, 132, 132, 0.849);
+    border-top: none;
+    background-color: rgb(228, 228, 228);
+    margin-bottom: 30px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 15px;
+}
+
+.noteDivTitle{
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(127, 175, 157, 0.849);
+    font-size: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+}
+
+.noteDivText{
+    background-color: rgb(228, 228, 228);
+    margin-bottom: 30px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 15px;
+}
+
+.date{
+    font-size: 14px;
+    position: absolute;
+    left: 5px;
+    bottom: 2px;
+}
+
+.closeButton{
+    position: absolute;
+    right: 7px;
+    top: 0px;
+    font-size: 30px !important;
+}
+
+.pinButton{
+    font-size: 15px;
+    position: absolute;
+    left: 25px;
+    top: 5px;
+ 
+}

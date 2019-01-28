@@ -4,7 +4,6 @@ body{
     word-break: break-all;
 }
 
-
 h4{
     margin: 0 !important;
     padding-bottom: 30px;
@@ -12,10 +11,6 @@ h4{
 
 #title{
     margin-bottom: 30px;
-}
-
-#defaultColorsButton{
-    margin-right: 15px;
 }
 
 #text{
@@ -26,6 +21,24 @@ h4{
     margin: 15px;
 }
 
+#defaultColorsButton{
+    margin-right: 15px;
+}
+
+.closeButton{
+    position: absolute;
+    right: 7px;
+    top: 0px;
+    font-size: 30px !important;
+}
+
+.pinButton{
+    font-size: 15px;
+    position: absolute;
+    left: 25px;
+    top: 5px;
+ 
+}
 
 .noteDiv{
     height: 800px;
@@ -80,19 +93,4 @@ h4{
     position: absolute;
     left: 5px;
     bottom: 2px;
-}
-
-.closeButton{
-    position: absolute;
-    right: 7px;
-    top: 0px;
-    font-size: 30px !important;
-}
-
-.pinButton{
-    font-size: 15px;
-    position: absolute;
-    left: 25px;
-    top: 5px;
- 
 }

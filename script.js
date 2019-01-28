@@ -7,6 +7,7 @@ let pinnedNotesColor = document.getElementById('pinnedColorButton');
 let userInputTitle = document.getElementById("title");
 let userInputText = document.getElementById("text");
 let colorsArray=[];
+//Checking if we have notes in localstorage, if yes load them, if no create new one
 if(localStorage.getItem('colors')){
     colorsArray=JSON.parse(localStorage.getItem('colors'));
     notesColor.value = colorsArray[0];
@@ -42,13 +43,13 @@ window.onload = function(){
 
 function loadNotes() {
 
-    //TODO PINNED LIST
     pinnedNotesRow.innerHTML = "";
     notesRow.innerHTML = "";
+    // Adding notes to page
     notesArray.forEach(element => {
         if (element.isPinned) {
             pinnedNotesRow.innerHTML += "<div class=\"col-6\">\
-                                <div class=\"pinnedNoteDivTitle\">\
+                                <div class=\"pinnedNoteDivTitle\" style=\"background-color:"+colorsArray[1]+";border-color:"+colorsArray[1]+"\">\
                                     <h4>"+ element.title + "</h4>\
                                     <span class=\"date\">Added on "+ new Date(element.date).toLocaleString() + "</span>\
                                     <span class=\"pinButton\"><input type=\"checkbox\" class=\"form-check-input\" onchange=\"pinNote("+ element.date + ")\" id=\"exampleCheck1\" checked>Pin</span>\
@@ -56,12 +57,12 @@ function loadNotes() {
                                         <span aria-hidden=\"true\">&times;</span>\
                                     </button>\
                                 </div>\
-                                <div class=\"pinnedNoteDivText\">"+ element.text + "</div>\
+                                <div class=\"pinnedNoteDivText\" style=\"border-color:"+colorsArray[1]+"\">"+ element.text + "</div>\
                             </div>"
         }
         else {
             notesRow.innerHTML += "<div class=\"col-6\">\
-                                <div class=\"noteDivTitle\">\
+                                <div class=\"noteDivTitle\" style=\"background-color:"+colorsArray[0]+"\">\
                                     <h4>"+ element.title + "</h4>\
                                     <span class=\"date\">Added on "+ new Date(element.date).toLocaleString() + "</span>\
                                     <span class=\"pinButton\"><input type=\"checkbox\" class=\"form-check-input\" onchange=\"pinNote("+ element.date + ")\" id=\"exampleCheck1\">Pin</span>\
@@ -78,7 +79,7 @@ function loadNotes() {
 }
 
  
-
+// Create note
 function addNote(){
     let actualDate = Date.now();
     textWithAddedBreakLines=(userInputText.value).replace(/\n/g, "<br/>");
@@ -106,7 +107,6 @@ function pinNote(timeWhenNoteWasAdded){
     loadNotes();
     
 }
-
 
 function deleteAllNotes(){
     console.log(notesArray)

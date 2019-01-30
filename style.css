@@ -17,12 +17,28 @@ h4{
     margin-bottom: 30px;
 }
 
+.icon-edit{
+    position: absolute;
+    right: 30px;
+    top: 3px;
+    color: rgb(66, 66, 66);
+}
+
+.icon-edit:hover{
+    cursor: pointer;
+    color: rgb(19, 19, 19);
+}
+
 .colorButtons{
     margin: 15px;
 }
 
 #defaultColorsButton{
     margin-right: 15px;
+}
+
+#acceptEditButton{
+    margin-top: 10px;
 }
 
 .closeButton{

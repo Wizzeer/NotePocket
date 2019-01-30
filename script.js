@@ -6,6 +6,7 @@ let notesColor = document.getElementById('colorButton');
 let pinnedNotesColor = document.getElementById('pinnedColorButton');
 let userInputTitle = document.getElementById("title");
 let userInputText = document.getElementById("text");
+let isEditing=false;
 let colorsArray=[];
 //Checking if we have notes in localstorage, if yes load them, if no create new one
 if(localStorage.getItem('colors')){
@@ -53,11 +54,12 @@ function loadNotes() {
                                     <h4>"+ element.title + "</h4>\
                                     <span class=\"date\">Added on "+ new Date(element.date).toLocaleString() + "</span>\
                                     <span class=\"pinButton\"><input type=\"checkbox\" class=\"form-check-input\" onchange=\"pinNote("+ element.date + ")\" id=\"exampleCheck1\" checked>Pin</span>\
+                                    <i class=\"icon-edit\" onclick=\"editNote("+element.date+")\"></i>\
                                     <button type=\"button\" class=\"close closeButton\" data-toggle=\"modal\" onclick=\"openModal("+ element.date + ")\" data-target=\"#deleteOneNoteModal\" aria-label=\"Close\">\
                                         <span aria-hidden=\"true\">&times;</span>\
                                     </button>\
                                 </div>\
-                                <div class=\"pinnedNoteDivText\" style=\"border-color:"+colorsArray[1]+"\">"+ element.text + "</div>\
+                                <div class=\"pinnedNoteDivText\" id=\""+element.date+"\" style=\"border-color:"+colorsArray[1]+"\">"+ element.text + "</div>\
                             </div>"
         }
         else {
@@ -66,11 +68,12 @@ function loadNotes() {
                                     <h4>"+ element.title + "</h4>\
                                     <span class=\"date\">Added on "+ new Date(element.date).toLocaleString() + "</span>\
                                     <span class=\"pinButton\"><input type=\"checkbox\" class=\"form-check-input\" onchange=\"pinNote("+ element.date + ")\" id=\"exampleCheck1\">Pin</span>\
+                                    <i class=\"icon-edit\" onclick=\"editNote("+element.date+")\"></i>\
                                     <button type=\"button\" class=\"close closeButton\" data-toggle=\"modal\" onclick=\"openModal("+ element.date + ")\" data-target=\"#deleteOneNoteModal\" aria-label=\"Close\">\
                                         <span aria-hidden=\"true\">&times;</span>\
                                     </button>\
                                 </div>\
-                                <div class=\"noteDivText\">"+ element.text + "</div>\
+                                <div class=\"noteDivText\" id=\""+element.date+"\">"+ element.text + "</div>\
                             </div>"
         }
 
@@ -133,6 +136,45 @@ function deleteNote(timeWhenNoteWasAdded){
 
 }
 
+function editNote(timeWhenNoteWasAdded){
+    isEditing =!isEditing;
+    if(isEditing==true){
+        let i=0;
+        notesArray.forEach(element => {
+        if(element.date==timeWhenNoteWasAdded){
+            let text = document.getElementById(timeWhenNoteWasAdded);
+            textWithoutAddedBreakLines=(notesArray[i].text).replace(/<br\/>/g, "&#013");
+            textWithoutHardSpaces=textWithoutAddedBreakLines.replace(/&nbsp;/g, ' ');
+            text.innerHTML= "<textarea class=\"form-control\" id=\""+(element.date+1)+"\" rows=\"4\">"+textWithoutHardSpaces+"</textarea>\
+            <button type=\"button\" class=\"btn btn-secondary\" id=\"acceptEditButton\" onclick=\"acceptEdit("+(element.date+1)+", "+i+")\">Accept changes</button>"
+            
+        }
+        i++
+    });
+    }
+    else{
+        let i=0;
+        notesArray.forEach(element => {
+        if(element.date==timeWhenNoteWasAdded){
+            let text = document.getElementById(timeWhenNoteWasAdded);
+            text.innerHTML= notesArray[i].text;
+        }
+        i++
+    });
+    }
+    
+}
+
+function acceptEdit(idToAccept, noteId){
+    console.log("elo")
+    let acceptedText=document.getElementById(idToAccept);
+    textWithAddedBreakLines=(acceptedText.value).replace(/\n/g, "<br/>");
+    textWithHardSpaces=textWithAddedBreakLines.replace(/ /g, '&nbsp;');
+    notesArray[noteId].text=textWithHardSpaces;
+    localStorage.setItem('notes', JSON.stringify(notesArray));
+    loadNotes();
+}
+
 function changeColor(){
     console.log(colorsArray)
     colorsArray[0]=(notesColor.value)
@@ -170,5 +212,7 @@ function setDefaultColors(){
     for (let i = 0; i < noteDivTitle.length; i++) {
         noteDivTitle[i].style.backgroundColor=colorsArray[0];
     }
+
+    
 }
 
